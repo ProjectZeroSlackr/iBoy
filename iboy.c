@@ -130,7 +130,7 @@ extern char *config_file;
 
 void iboy_init(char *rom, char *path)
 {
-	const char * cp[] = { "./iboy.cfg", "/mnt/iboy.cfg", "/hp/iboy.cfg", "/etc/iboy.cfg"};
+	const char * cp[] = { "Conf/iboy.cfg", "/opt/Emulators/iBoy/Conf/iboy.cfg", "./iboy.cfg", "/mnt/iboy.cfg", "/hp/iboy.cfg", "/etc/iboy.cfg"};
 	int i;
 
 
@@ -208,7 +208,7 @@ int main(int argc, char **argv)
 //	stderr = fopen("/stderr.txt", "w+");
 
 	if(argc==2) {
-		iboy_init(argv[1], "/roms/");	// that ain't clever
+		iboy_init(argv[1], "/opt/Emulators/iBoy/Roms/");
 	}
 	else if(argc==3) {
 		iboy_init(argv[1], argv[2]);

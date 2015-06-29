@@ -156,9 +156,7 @@ void do_saveconfig_rom()
 	char *d, *r, *c;
 
 	r = config_get_s("romfile");
-	d = config_get_s("romdir");
-	if(old_rom_path)
-		d = old_rom_path;
+	d = "/opt/Emulators/iBoy/Conf/";
 	c = malloc(strlen(d) + strlen(r) + 2);
 	strcpy(c, d);
 	strcat(c, r);
@@ -200,11 +198,11 @@ void do_romload()
 	old_rom_selected = cur_selected;
 
 	err_msg("Loading\xff", 0);
-	config_load("/etc/iboy.cfg");
+	config_load("/opt/Emulators/iBoy/Conf/iboy.cfg");
 
 	config_set_s("romfile", p);
 
-	d = get_current_dir_name();
+	d = "/opt/Emulators/iBoy/Conf/";
 
 	if(old_rom_path) {
 		free(old_rom_path);
@@ -214,7 +212,6 @@ void do_romload()
 
 	//config_get_s("romdir");
 	c = malloc(strlen(d) + strlen(p) + 2);
-	free(d);
 	strcpy(c, d);
 	strcat(c, p);
 	strcpy(c + strlen(c) - (3+(p[strlen(p)-1] == 'c')), ".cfg");
@@ -229,8 +226,9 @@ void do_romload()
 void do_reset()
 {
 	if(config_isempty_s("romfile")) return;
-	emu_reload();
+	emu_reset();
 	ireturn = 1;
+	cop_begin();
 }
 
 
